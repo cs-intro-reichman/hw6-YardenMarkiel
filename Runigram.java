@@ -121,11 +121,9 @@ public class Runigram {
 	// the three values r = lum, g = lum, b = lum.
 	private static Color luminance(Color pixel) {
 		//// Replace the following statement with your code
-		double newRed = pixel.getRed() * 0.299;
-		double newGreen = pixel.getGreen() * 0.587;
-		double newBlue = pixel.getBlue() * 0.114;
-		Color newPixel = new Color( (int)newRed , (int)newGreen, (int)newBlue);
-		return newPixel;
+		int lum = (int) (pixel.getRed() * 0.299 + pixel.getGreen() * 0.587 + pixel.getBlue() * 0.114);
+		return new Color(lum, lum, lum);
+		
 	}
 	
 	/**
@@ -147,14 +145,14 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		//// Replace the following statement with your code
-		Color[][] newImage = new Color [width][height];
+		Color[][] newImage = new Color[height][width];
 		double orgHeight = image.length;
 		double orgWidth = image[0].length;
-		for ( int i = 0 ; i < height ; i++ ){
-			for ( int j = 0 ; j < width ; j++ ){
-				int X = (int)(i * ((double)(orgHeight / height)));
-				int Y = (int)(j * ((double)(orgWidth / width)));
+	
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				int X = (int) (i * (orgHeight / height));
+				int Y = (int) (j * (orgWidth / width));
 				newImage[i][j] = image[X][Y];
 			}
 		}
@@ -241,4 +239,3 @@ public class Runigram {
 		StdDraw.show();
 	}
 }
-
