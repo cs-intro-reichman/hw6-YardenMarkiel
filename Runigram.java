@@ -165,12 +165,15 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		//// Replace the following statement with your code
-		Color x1 = new Color((int)(c1.getRed() * alpha ), (int)(c1.getGreen() * alpha ),(int)(c1.getBlue() * alpha ));
-		Color x2 = new Color((int)(c2.getRed() * (1-alpha) ), (int)(c2.getGreen() * (1-alpha) ),(int)(c2.getBlue() * (1-alpha) ));
-		Color x3 = new Color((x1.getRed() + x2.getRed()) ,(x1.getGreen() + x2.getGreen()) ,(x1.getBlue() + x2.getBlue()));
-		return x3;
-	}	
+		int red = (int) (alpha * c1.getRed() + (1 - alpha) * c2.getRed());
+		int green = (int) (alpha * c1.getGreen() + (1 - alpha) * c2.getGreen());
+		int blue = (int) (alpha * c1.getBlue() + (1 - alpha) * c2.getBlue());
+		return new Color(
+			Math.max(0, Math.min(255, red)),
+			Math.max(0, Math.min(255, green)),
+			Math.max(0, Math.min(255, blue))
+		);
+	}
 	/**
 	 * Cosntructs and returns an image which is the blending of the two given images.
 	 * The blended image is the linear combination of (alpha) part of the first image
